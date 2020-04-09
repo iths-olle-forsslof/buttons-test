@@ -1,3 +1,7 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -7,41 +11,39 @@ body {
 .card-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    position: relative;
+    /* position: relative; */
     height: 250px;
     width: 400px;
     background-color: rgb(29, 29, 32);
-    box-sizing: border-box;
+ 
     z-index: 0;
+}
+
+.card-container > p {
+    margin: 2rem;
+    color: bisque;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: .8rem;
 }
 
 .btn-container {
     position: relative;
     width: 90%;
     padding: .5rem;
-    box-sizing: border-box;
-    /* overflow: hidden; */
+ 
 }
 
 .push-me-btn {
-    /* background-color: bisque; */
     width: 100%;
     padding: 0px;
     border: none;
-    box-sizing: border-box;
+ 
     z-index: 1;
     background-color: transparent;
     cursor: pointer;
 }
-
-/* .push-me-btn p {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: .5rem;
-    font-weight: 100;
-    color: rgb(29, 29, 32);
-} */
 
 .push-me-btn::before, .push-me-btn::after{
     content:"";
@@ -50,7 +52,7 @@ body {
     left: 8%;
     height: calc(50% - .4rem);
     border: 1px solid bisque;
-    box-sizing: border-box;
+ 
     z-index: -1;
     transform: scaleY(.3);
     transition: transform .1s ease-in-out .25s, left .2s, width .2s;
@@ -66,17 +68,6 @@ body {
     bottom: 0px;
     width: 84%;
     border-top: 0px;
-}
-
-.push-me-btn:hover:before, .push-me-btn:hover:after{
-    width: 100%;
-    left: 0%;
-    transform: scaleX(1);
-    transition: transform .1s;
-}
-
-.push-me-btn:active:before, .push-me-btn:active:after{
-    transform: scale(.9);
 }
 
 .btn-text {
@@ -98,7 +89,7 @@ body {
     left: 0;
     bottom: 0;
     background-color: bisque;
-    box-sizing: border-box;
+ 
 }
 
 .btn-text::after {
@@ -111,7 +102,7 @@ body {
     top: 0;
     right: 0;
     background-color: bisque;
-    box-sizing: border-box;
+ 
 }
 
 .btn-text-span {
@@ -120,7 +111,7 @@ body {
     padding: 1rem 3rem;
     background-color: transparent;
     z-index: 1;
-    box-sizing: border-box;
+ 
     font-family: 'Catamaran', sans-serif;
     font-size: 1.3rem;
     font-weight: 100;
@@ -150,7 +141,7 @@ body {
     z-index: 1;
     transition: transform .3s ease-in-out;
     /* mix-blend-mode: normal; */
-    box-sizing: border-box;
+ 
 }
 
 .push-me-btn:hover .btn-text-span {
@@ -165,3 +156,13 @@ body {
     background-color: bisque;
 }
 
+.push-me-btn:hover:before, .push-me-btn:hover:after{
+    width: 100%;
+    left: 0%;
+    transform: scaleX(1);
+    transition: transform .1s;
+}
+
+.push-me-btn:active:before, .push-me-btn:active:after{
+    transform: scale(.9);
+}
