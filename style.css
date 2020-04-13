@@ -4,11 +4,12 @@
 
 body {
     display: flex;
+    flex-flow: row wrap;
     justify-content: center;
     padding: 50px;
 }
 
-.card-container {
+.container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -17,7 +18,7 @@ body {
     height: 250px;
     width: 400px;
     background-color: rgb(29, 29, 32);
- 
+    margin: 1rem;
     z-index: 0;
 }
 
@@ -165,4 +166,17 @@ body {
 
 .push-me-btn:active:before, .push-me-btn:active:after{
     transform: scale(.9);
+}
+
+/* ///////////////////////////////////////////////////////////// */
+
+.test {
+    font-family: 'Catamaran', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 100;
+    letter-spacing: .2rem;
+    color: rgb(29, 29, 32);
+    color: rgb(228, 222, 222);
+    padding: 1rem;
+    border: 1px solid lightgrey;
 }
