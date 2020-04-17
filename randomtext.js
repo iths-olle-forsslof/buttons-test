@@ -3,7 +3,7 @@ class RandomLetters {
         this.currentString = 0
         this.currentLength = 0
         this.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        // this.alphabet = '½!"#¤#&/()=?'
+        this.symbols = '@!#$%&?½§£'
         this.fadeBuffer = false
         this.strings = ['HOVER ME', 'CLICK ME', 'THANK YOU!']
         this.place = document.querySelector('.test')
@@ -17,12 +17,13 @@ class RandomLetters {
     generateRandomString(length) {
         let randomString = ''
         while (randomString.length < length) {
-            randomString += this.alphabet.charAt(Math.floor(Math.random() * this.alphabet.length))
+            randomString += this.symbols.charAt(Math.floor(Math.random() * this.symbols.length))
         }
         return randomString
     }
 
-    animateRandomWord() {
+    //
+    initAnimation() {
         if (this.currentLength < this.strings[this.currentString].length) {
             this.currentLength = this.strings[this.currentString].length
          
@@ -36,14 +37,16 @@ class RandomLetters {
         }
     }
 
+    // saves each letter in the next string together with a counter value. 
+    // Depending on the counter val. that's how many random letters are shown
+    // before the right letter appear.
     animateNewWord() {
         if(this.fadeBuffer == false) {
             this.fadeBuffer = []
             for (let i = 0; i < this.strings[this.currentString].length; i++) {
-                this.fadeBuffer.push({count: Math.floor(Math.random()*10)+1, letter: this.strings[this.currentString].charAt(i)})
+                this.fadeBuffer.push({count: /*Math.floor(Math.random()*10)+1*/ i, letter: this.strings[this.currentString].charAt(i)})
             }
         }
-        console.log(this.fadeBuffer);
         
         let cycles = false;
         let newString = '';
@@ -53,7 +56,7 @@ class RandomLetters {
             if (fader.count > 0) {
                 cycles = true
                 fader.count--
-                newString += this.alphabet.charAt(Math.floor(Math.random()*this.alphabet.length))
+                newString += this.symbols.charAt(Math.floor(Math.random()*this.symbols.length))
             } else {
                 newString += fader.letter
             }
@@ -68,30 +71,67 @@ class RandomLetters {
         }
     }
 
-    checkCurrentString() {
-        if (this.currentString = this.strings.length) {
-            this.currentString = 0 
-        } else {
-            this.currentString++
+    checkCurrentString(typeOfEvent) {
+        
+        if (typeOfEvent == 'mouseout') {
+            if (this.currentString == this.strings.length - 1) {
+                this.currentString = 0 
+            } else {
+                this.currentString = 0
+            }
+        } 
+        if (typeOfEvent == 'mouseup') {
+            if (this.currentString == 1) {
+                this.currentString++
+            }
+            console.log('curr string: ', this.currentString);
         }
+
+        if (typeOfEvent == 'mouseover') {
+            if (this.currentString == 0) {
+                this.currentString++ 
+            } else {
+                this.currentString = 0
+            }
+        }
+
+
         this.currentLength = 0
         this.fadeBuffer = false
-        // this.place.innerHTML = ''
         this.showWord(this.strings[this.currentString])
     }
 
-    init() {
+    init(event) {
         setTimeout(()=>{
-            this.checkCurrentString()
-            this.animateRandomWord()
+            this.checkCurrentString(event)
+            this.initAnimation()
         },50)
         
     }
 }
 
+let randomText = document.querySelector('.random-text')
 let test = new RandomLetters()
 test.showWord()
 
-test.place.addEventListener('mouseover', () => {
-    test.init();
+test.place.addEventListener('mouseover', (event) => {
+    console.log(event.type);
+    test.init(event.type)
 })
+test.place.addEventListener('mouseup', (event) => {
+    console.log(event.type);
+    test.init(event.type)
+})
+test.place.addEventListener('mouseout', (event) => {
+    console.log(event.type);
+    test.init(event.type)
+})
+// randomText.addEventListener('mousemove', (event) => {
+//     console.log(event);
+    
+//     if (test.strings[test.currentString] == 0) {
+//         test.place.addEventListener('mouseover', test.init())
+//     } else if (test.strings[test.currentString] == 1) {
+//         test.place.addEventListener('click', test.init())
+//     }
+// })

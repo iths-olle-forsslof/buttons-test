@@ -33,14 +33,12 @@ body {
     position: relative;
     width: 90%;
     padding: .5rem;
- 
 }
 
 .push-me-btn {
     width: 100%;
     padding: 0px;
     border: none;
- 
     z-index: 1;
     background-color: transparent;
     cursor: pointer;
@@ -170,13 +168,54 @@ body {
 
 /* ///////////////////////////////////////////////////////////// */
 
+
+
 .test {
-    font-family: 'Catamaran', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: 'Share Tech Mono', monospace;
     font-size: 1.3rem;
     font-weight: 100;
     letter-spacing: .2rem;
-    color: rgb(29, 29, 32);
+    background-color: rgb(29, 29, 32);
     color: rgb(228, 222, 222);
-    padding: 1rem;
-    border: 1px solid lightgrey;
+    padding: 2rem;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 0px white;
+    transition: box-shadow .2s;
+}
+
+.test::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 5%;
+    width: 100%;
+    border-left: 1px solid rgba(228, 222, 222, .6);
+    border-right: 1px solid rgba(228, 222, 222, .6);
+    transition: height .2s, box-shadow .05s;
+}
+
+.test::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2%;
+    border-top: 1px solid rgba(228, 222, 222, .6);
+    border-bottom: 1px solid rgba(228, 222, 222, .6);
+    transition: width .2s, box-shadow .05s;
+}
+
+.test:hover:before, .test:hover:after{
+    height: 100%;
+    width: 100%;
+    /* transition: transform .2s; */
+}
+
+.test:active:before, .test:active:after {
+    transform: scale(.9);
+    box-shadow: 0 0 50px -10px rgba(233, 236, 204, 0.315);
 }
